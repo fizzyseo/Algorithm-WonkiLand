@@ -20,8 +20,10 @@ public class Frame_Quest01_Output extends JFrame {
         super("Frame_Quest03_Output");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Use the JLayerPane to set the background image to be most backward
         JLayeredPane layeredPane = new JLayeredPane();
 
+        // Background image settings
         JLabel backgroundLabel = new JLabel();
         Image background = new ImageIcon("image/background.png").getImage();
         Image scaledBackground = background.getScaledInstance(1500, 840, Image.SCALE_SMOOTH);
@@ -29,12 +31,14 @@ public class Frame_Quest01_Output extends JFrame {
         backgroundLabel.setBounds(0, 0, 1500, 840);
         layeredPane.add(backgroundLabel, new Integer(0));
 
+        // Add description at the top
         JLabel titleLabel = new JLabel("Quest 1: Giving carrots to Lord Wonki's horse ");
         titleLabel.setFont(new Font("Inter", Font.BOLD, 45));
         titleLabel.setBounds(160, 55, 1168, 115);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         layeredPane.add(titleLabel, new Integer(1));
 
+        // Main Photo
         manLabel = new JLabel();
         Image manImage = new ImageIcon("image/quest01_man_smile.png").getImage();
         Image scaledManImage = manImage.getScaledInstance(385, 381, Image.SCALE_SMOOTH);
@@ -43,7 +47,7 @@ public class Frame_Quest01_Output extends JFrame {
         layeredPane.add(manLabel, new Integer(1));
 
 
-        // 메세지창 배경 설정
+        // Set the message box background
         dialogLabel = new JLabel();
         Image dialogImage = new ImageIcon("image/dialog.png").getImage();
         Image scaledDialogImage = dialogImage.getScaledInstance(1042, 193, Image.SCALE_SMOOTH);
@@ -58,7 +62,7 @@ public class Frame_Quest01_Output extends JFrame {
         stampLabel.setBounds(857, 170, 364, 371);
         layeredPane.add(stampLabel, new Integer(3));
         
-     // 메세지창 텍스트 설정
+        // Set the message box text
         textLabel = new JLabel("<html>"
                 + "That's great!</html>");
         textLabel.setFont(new Font("Inter", Font.BOLD, 40));

@@ -5,9 +5,9 @@ import java.util.Comparator;
 
 public class Frame_Quest03_Algorithm {
 
-    private int numberOfVillages;   // 마을의 수
-    private int numberOfPaths;      // 연결할 도로의 수
-    private int[][][] roadCosts;    // 도로 비용 정보 (출발지, 목적지, 비용)
+    private int numberOfVillages;   // the number of villages
+    private int numberOfPaths;      // Number of roads to connect
+    private int[][][] roadCosts;    // Road cost information (starting point, destination, cost)
 
     public Frame_Quest03_Algorithm(int numberOfVillages, int numberOfPaths, int[][][] roadCosts) {
         this.numberOfVillages = numberOfVillages;
@@ -16,11 +16,11 @@ public class Frame_Quest03_Algorithm {
     }
 
     /*
-     Kruskal 알고리즘을 사용하여 모든 마을을 연결하는 최소 비용을 계산
-     return 최소 비용
+	Calculate the minimum cost of connecting all towns using the Kruskal algorithm
+	return minimum cost
      */
     public int calculate() {
-        // 도로를 비용에 따라 정렬
+    	// Sorting roads according to cost
         Arrays.sort(roadCosts, Comparator.comparingInt(a -> a[2][0]));
 
         int[] parent = new int[numberOfVillages];
@@ -36,7 +36,7 @@ public class Frame_Quest03_Algorithm {
             int sourceParent = find(parent, source);
             int destinationParent = find(parent, destination);
 
-            // 두 마을이 서로 다른 집합에 속해 있으면 연결하고 비용을 총 비용에 추가
+         // If two villages belong to different sets, connect and add the cost to the total cost
             if (sourceParent != destinationParent) {
                 totalCost += cost;
                 union(parent, sourceParent, destinationParent);
@@ -47,11 +47,11 @@ public class Frame_Quest03_Algorithm {
     }
 
     /*
-     주어진 마을이 속한 집합의 부모를 찾는 메서드
-     parent  부모를 찾을 마을 배열
-     village 부모를 찾을 마을
-     return 마을이 속한 집합의 부모
-     */
+    Method of finding the parent of the set to which a given town belongs
+    parent : arrangement of villages to find parents
+    Village: Village to find parents
+    return : the parent of the set to which the village belongs
+         */
     private int find(int[] parent, int village) {
         if (parent[village] == -1) {
             return village;
@@ -60,11 +60,11 @@ public class Frame_Quest03_Algorithm {
     }
 
     /*
-     두 마을을 서로 연결하는 메서드
-     parent    부모를 찾을 마을 배열
-     village1  연결할 첫 번째 마을
-     village2  연결할 두 번째 마을
-     */
+    a way to link two villages together
+    parent : arrangement of villages to find parents
+    Village1: The first town to connect to
+    Village2: the second town to connect to
+         */
     private void union(int[] parent, int village1, int village2) {
         int village1Parent = find(parent, village1);
         int village2Parent = find(parent, village2);

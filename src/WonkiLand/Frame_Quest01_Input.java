@@ -14,10 +14,10 @@ public class Frame_Quest01_Input extends JFrame {
         super("Frame_Quest01_Input");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // JLayeredPane을 이용하여 백그라운드 이미지가 가장 뒤로 가도록 설정
+        // Set the background image to be most backward Using the JLayerPane
         JLayeredPane layeredPane = new JLayeredPane();
 
-        // 백그라운드 이미지 설정
+        // Background Image Settings
         JLabel backgroundLabel = new JLabel();
         Image background = new ImageIcon("image/background.png").getImage();
         Image scaledbackground = background.getScaledInstance(1500, 840, Image.SCALE_SMOOTH);
@@ -25,14 +25,14 @@ public class Frame_Quest01_Input extends JFrame {
         backgroundLabel.setBounds(0, 0, 1500, 840);
         layeredPane.add(backgroundLabel, new Integer(0)); // 앞 뒤 우선순위 조절 0 1 2 3 순으로 위로 올라감
 
-        // 위쪽에 Title 넣기
+     	// Add text
         JLabel titleLabel = new JLabel("Quest 1: Giving carrots to Lord Wonki's horse");
         titleLabel.setFont(new Font("Inter", Font.BOLD, 45));
         titleLabel.setBounds(160, 55, 1168, 115);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         layeredPane.add(titleLabel, new Integer(1));
 
-        // 상점 아이콘 설정
+        // Add image1
         JLabel storeLabel = new JLabel();
         Image store = new ImageIcon("image/icon_store.png").getImage();
         Image scaledstoreImage = store.getScaledInstance(115, 115, Image.SCALE_SMOOTH);
@@ -40,7 +40,7 @@ public class Frame_Quest01_Input extends JFrame {
         storeLabel.setBounds(230, 221, 115, 115);
         layeredPane.add(storeLabel, new Integer(2));
         
-        // 거리 아이콘 설정
+        // Add image2
         JLabel lengthLabel = new JLabel();
         Image length = new ImageIcon("image/icon_length.png").getImage();
         Image scaledlengthImage = length.getScaledInstance(115, 115, Image.SCALE_SMOOTH);
@@ -48,7 +48,7 @@ public class Frame_Quest01_Input extends JFrame {
         lengthLabel.setBounds(230, 378, 115, 115);
         layeredPane.add(lengthLabel, new Integer(2));
         
-        // 당근 아이콘 설정
+        // Add image3
         JLabel carrotLabel = new JLabel();
         Image carrot = new ImageIcon("image/icon_carrot.png").getImage();
         Image scaledcarrotImage = carrot.getScaledInstance(115, 115, Image.SCALE_SMOOTH);
@@ -56,7 +56,7 @@ public class Frame_Quest01_Input extends JFrame {
         carrotLabel.setBounds(230, 530, 115, 115);
         layeredPane.add(carrotLabel, new Integer(2));
         
-        // 텍스트 설정
+        // Add text
         JLabel textLabel1 = new JLabel("The number of stores");
         textLabel1.setFont(new Font("Inter", Font.BOLD, 30));
         textLabel1.setBounds(398, 248, 470, 60);
@@ -74,7 +74,7 @@ public class Frame_Quest01_Input extends JFrame {
         textLabel3.setBounds(398, 558, 598, 60);
         layeredPane.add(textLabel3, new Integer(1));
         
-        // 입력 받을 메세지 창
+        // Message window to be entered
         storeField = new HintTextField("4");
         storeField.setFont(new Font("Inter", Font.PLAIN, 25));
         storeField.setBounds(1035, 248, 270, 65);
@@ -91,7 +91,7 @@ public class Frame_Quest01_Input extends JFrame {
         layeredPane.add(carrotField, new Integer(3));
         
         
-        // 제출 스크롤 설정
+        // Set next scroll
         JLabel nextLabel = new JLabel();
         Image ScrollImage = new ImageIcon("image/submit_scroll.png").getImage();
         Image scaledScrollImage = ScrollImage.getScaledInstance(187, 100, Image.SCALE_SMOOTH);
@@ -99,46 +99,48 @@ public class Frame_Quest01_Input extends JFrame {
         nextLabel.setBounds(1205, 660, 187, 100);
         layeredPane.add(nextLabel, new Integer(4));
         
-        // 스크롤 눌렀을 때 다음 프레임으로 이동하도록 MouseListener 추가
+        // Add MouseListener to move to the next frame when scrolling is pressed
         nextLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // 다음 프레임으로 이동
+                // Move to the next frame
                nextFrame();
             }
         });
         
-        setFocusable(true);  // 키 이벤트를 받을 수 있도록 포커스 설정
-        requestFocusInWindow();  // 창이 열리면서 바로 포커스 요청
+        setFocusable(true);  // Set focus to receive key events
+        requestFocusInWindow();  // As soon as the window opens, request focus
         
-        // JLayeredPane을 프레임에 추가
+        // Add JLayeredPane to frame
         add(layeredPane);
         
-        // 프레임 사이즈 설정
+        // Set frame size
         setSize(1510, 880);
         setVisible(true);
        }
 
-    // 다음 프레임 열기 위한 메소드
+    // Method to open the next frame
     private void nextFrame() {
-        // 사용자로부터 입력받은 값
-        int 가게수 = Integer.parseInt(storeField.getText()); // 가게수를 storeField로부터 입력받음
-        String[] 거리입력 = lengthField.getText().split(" ");
-        long[] 거리 = new long[거리입력.length];
-        for (int i = 0; i < 거리입력.length; i++) {
-            거리[i] = Long.parseLong(거리입력[i]); // 거리를 lengthField로부터 입력받음
-        }
-        String[] 연료가격입력 = carrotField.getText().split(" ");
-        long[] 연료가격 = new long[연료가격입력.length];
-        for (int i = 0; i < 연료가격입력.length; i++) {
-            연료가격[i] = Long.parseLong(연료가격입력[i]); // 연료가격을 carrotField로부터 입력받음
-        }
+        // Value entered by user
+    	int numberofstores = Integer.parseInt(storeField.getText()); // received the number of stores from storeField
+    	String[] distanceinput = lengthField.getText().split(" ");
+    	long[] distance = new long [distanceinput.length];
+    	for (int i = 0; i < distanceinput.length; i++) {
+    			distance[i] = Long.parseLong (distanceinput[i]); // distance received from lengthField
+    	}
+    	
+    	String[] FuelPriceInput = carrotField.getText().split(" ");
+    	long[] fuelprice = new long [FuelPriceInput. length];
+    	for (int i = 0; i < FuelPriceInput.length; i++) {
+    		fuelprice [i] = Long.parseLong (FuelPriceInput [i]); // Fuel price received from carrotField
+    		}
 
-        Frame_Quest01_Output frame_Quest01_Output = new Frame_Quest01_Output(가게수, 거리, 연료가격);
-        frame_Quest01_Output.setVisible(true);
+    	Frame_Quest01_Output frame_Quest01_Output = new Frame_Quest01_Output (numberofstores, distance, fuelprice);
+    	frame_Quest01_Output.setVisible(true);
 
-        setVisible(false);
-        dispose();
+    	// Hide current frame
+    	setVisible(false);
+    	dispose();  // Remove current frame from memory
     }
 
     

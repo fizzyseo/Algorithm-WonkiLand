@@ -15,10 +15,10 @@ public class Frame_Quest02_Input extends JFrame {
         super("Frame_Quest02_Input");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // JLayeredPane을 이용하여 백그라운드 이미지가 가장 뒤로 가도록 설정
+        // Set the background image to be most backward Using the JLayerPane 
         JLayeredPane layeredPane = new JLayeredPane();
 
-        // 백그라운드 이미지 설정
+        // Background Image Settings
         JLabel backgroundLabel = new JLabel();
         Image background = new ImageIcon("image/background.png").getImage();
         Image scaledbackground = background.getScaledInstance(1500, 840, Image.SCALE_SMOOTH);
@@ -26,14 +26,14 @@ public class Frame_Quest02_Input extends JFrame {
         backgroundLabel.setBounds(0, 0, 1500, 840);
         layeredPane.add(backgroundLabel, new Integer(0)); // 앞 뒤 우선순위 조절 0 1 2 3 순으로 위로 올라감
 
-        // 위쪽에 Title 넣기
+        // add title
         JLabel titleLabel = new JLabel("Quest 2 : Minimum number of dungeons ");
         titleLabel.setFont(new Font("Inter", Font.BOLD, 50));
         titleLabel.setBounds(160, 55, 1168, 115);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         layeredPane.add(titleLabel, new Integer(1));
 
-        // 파티 아이콘 설정
+        // add party icon
         JLabel storeLabel = new JLabel();
         Image store = new ImageIcon("image/icon_party.png").getImage();
         Image scaledstoreImage = store.getScaledInstance(217, 170, Image.SCALE_SMOOTH);
@@ -41,7 +41,7 @@ public class Frame_Quest02_Input extends JFrame {
         storeLabel.setBounds(239, 224, 217, 170);
         layeredPane.add(storeLabel, new Integer(2));
         
-        // 시간 아이콘 설정
+        // add time icon
         JLabel lengthLabel = new JLabel();
         Image length = new ImageIcon("image/icon_time.png").getImage();
         Image scaledlengthImage = length.getScaledInstance(187, 187, Image.SCALE_SMOOTH);
@@ -49,19 +49,19 @@ public class Frame_Quest02_Input extends JFrame {
         lengthLabel.setBounds(254, 465, 187, 187);
         layeredPane.add(lengthLabel, new Integer(2));
         
-        // 텍스트 설정
+        // add text
         JLabel textLabel1 = new JLabel("The number of party");
         textLabel1.setFont(new Font("Inter", Font.BOLD, 35));
         textLabel1.setBounds(475, 276, 550, 65);
         layeredPane.add(textLabel1, new Integer(1));
 
         JLabel textLabel2 = new JLabel("Reservation time for each team");
-        textLabel2.setFont(new Font("Inter", Font.BOLD, 27));
+        textLabel2.setFont(new Font("Inter", Font.BOLD, 35));
         textLabel2.setBounds(475, 524, 550, 65);
         layeredPane.add(textLabel2, new Integer(1));
 
         
-        // 입력 받을 메세지 창
+     // Set the message window text
         partyField = new HintTextField("3");
         partyField.setFont(new Font("Inter", Font.PLAIN, 25));
         partyField.setBounds(1040, 276, 270, 65);
@@ -73,7 +73,7 @@ public class Frame_Quest02_Input extends JFrame {
         layeredPane.add(timeField, new Integer(3));
 
         
-        // 제출 스크롤 설정
+        // add scroll
         JLabel nextLabel = new JLabel();
         Image ScrollImage = new ImageIcon("image/submit_scroll.png").getImage();
         Image scaledScrollImage = ScrollImage.getScaledInstance(187, 100, Image.SCALE_SMOOTH);
@@ -81,58 +81,49 @@ public class Frame_Quest02_Input extends JFrame {
         nextLabel.setBounds(1205, 660, 187, 100);
         layeredPane.add(nextLabel, new Integer(4));
         
-        // 스크롤 눌렀을 때 다음 프레임으로 이동하도록 MouseListener 추가
+        // Add MouseListener to move to the next frame when scrolling is pressed
         nextLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // 다음 프레임으로 이동
+                // Move to the next frame
             	nextFrame();
             }
         });
         
-       // 아무 키를 눌렀을 때 다음 프레임으로 이동하도록 KeyListener 추가
-//       addKeyListener(new KeyAdapter() {
-//            @Override
-//            public void keyPressed(KeyEvent e) {
-//                // 아무 키를 눌렀을 때 다음 프레임으로 이동
-//            	nextFrame();
-//            }
-//        });
+        setFocusable(true);  // Set focus to receive key events
+        requestFocusInWindow();  // As soon as the window opens, request focus
         
-        setFocusable(true);  // 키 이벤트를 받을 수 있도록 포커스 설정
-        requestFocusInWindow();  // 창이 열리면서 바로 포커스 요청
-        
-        // JLayeredPane을 프레임에 추가
+        // Add JLayeredPane to frame
         add(layeredPane);
         
-        // 프레임 사이즈 설정
+        //  Set frame size
         setSize(1510, 880);
         setVisible(true);
     	}
     
-    // 다음 프레임을 열기 위한 메소드
+    // Method to open the next frame
     private void nextFrame() {
-        try {
-            // 입력값 파싱
+    	try {
+            // Parsing Input Values
             int numberOfDungeon = Integer.parseInt(partyField.getText());
             String inputText = timeField.getText();
 
-            // 예외 처리: 사용자가 숫자를 입력하지 않으면 NumberFormatException 발생
+            // Exception: NumberFormatException occurs if the user does not enter a number
             String[] timeStrings = inputText.split("\\)\\(");
 
-            // 정확한 크기의 study 배열을 초기화
+            // Initialize study array of correct size
             Point[] study = new Point[timeStrings.length];
 
             for (int i = 0; i < timeStrings.length; i++) {
-                // 문자열 앞뒤의 괄호를 제거하고, 각 숫자를 추출
+                // Remove parentheses before and after the string, and extract each number
                 String[] input = timeStrings[i].replaceAll("\\(", "").replaceAll("\\)", "").split(" ");
 
-                // 예시로 i 를 사용
+                // Use i as an example
                 study[i] = new Point(Integer.parseInt(input[0]) - 1, Integer.parseInt(input[1]) - 1);
             }
 
-            // 시작 시간을 기준으로 오름차순 정렬하되,
-            // 시작 시간이 같다면, 종료 시간을 기준으로 오름차순 정렬한다.
+         // Sort in ascending order by start time,
+         // If the start time is the same, sort in ascending order based on the end time.
             Arrays.sort(study, (l1, l2) -> l1.x == l2.x ? l1.y - l2.y : l1.x - l2.x);
 
             // Your existing logic for finding minimum classrooms
@@ -140,8 +131,8 @@ public class Frame_Quest02_Input extends JFrame {
             pq.offer(study[0].y);
 
             for (int i = 1; i < numberOfDungeon; i++) {
-                // 우선순위 큐에서 가장 작은 종료 시간과
-                // 현재 study[i]의 시작 시간을 비교한다.
+            	// The smallest exit time in the priority queue and
+            	// Compare the start time of the current study[i].
                 if (pq.peek() <= study[i].x) {
                     pq.poll();
                 }
@@ -154,9 +145,9 @@ public class Frame_Quest02_Input extends JFrame {
             Frame_Quest02_Output frame_Quest02_Output = new Frame_Quest02_Output(calculatedValue);
             frame_Quest02_Output.setVisible(true);
 
-            // 현재 프레임을 숨김
+            // Hide current frame
             setVisible(false);
-            dispose();  // 현재 프레임을 메모리에서 제거
+            dispose();  // Remove current frame from memory
         } catch (NumberFormatException e) {
             // Handle the case where parsing fails
             JOptionPane.showMessageDialog(this, "Invalid input. Please enter valid numbers.");

@@ -10,18 +10,18 @@ public class Frame_Last extends JFrame{
 		super("Last");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        // JLayeredPane을 이용하여 백그라운드 이미지가 가장 뒤로 가도록 설정
+        // Use the JLayerPane to set the background image to be most backward
         JLayeredPane layeredPane = new JLayeredPane();
         
-        // 백그라운드 이미지 설정
+        // Background image settings
         JLabel backgroundLabel = new JLabel();
         Image background = new ImageIcon("image/background.png").getImage();
         Image scaledbackground = background.getScaledInstance(1500, 840, Image.SCALE_SMOOTH);
         backgroundLabel.setIcon(new ImageIcon(scaledbackground));
         backgroundLabel.setBounds(0, 0, 1500, 840);
-        layeredPane.add(backgroundLabel, new Integer(0)); // 앞 뒤 우선순위 조절 0 1 2 3 순으로 위로 올라감
+        layeredPane.add(backgroundLabel, new Integer(0)); // Adjust the priorities 
         
-        // 바탕 넣기
+        // Put a background picture
         JLabel backgroundLabel2 = new JLabel();
         Image background2 = new ImageIcon("image/background2.png").getImage();
         Image scaledbackground2 = background2.getScaledInstance(1315, 675, Image.SCALE_SMOOTH);
@@ -29,7 +29,7 @@ public class Frame_Last extends JFrame{
         backgroundLabel2.setBounds(95, 80, 1315, 675);
         layeredPane.add(backgroundLabel2, new Integer(1));
         
-        // 위쪽에 설명 넣기
+        // Add description at the top
         JLabel textLabel = new JLabel("<html>"
                 + "You did a great job.  Smart mercenary.<br><br>"
                 + "Thanks to you, Wonki Land came back to life.<br><br>"
@@ -38,7 +38,7 @@ public class Frame_Last extends JFrame{
         textLabel.setBounds(200, 175, 794, 243);
         layeredPane.add(textLabel, new Integer(2));
         
-        // 골드 주머니 사진
+        // Gold Pouch picture
         JLabel imageLabel = new JLabel();
         Image image = new ImageIcon("image/Gold.png").getImage();
         Image scaledImage = image.getScaledInstance(311, 291, Image.SCALE_SMOOTH);
@@ -46,7 +46,7 @@ public class Frame_Last extends JFrame{
         imageLabel.setBounds(355, 374, 311, 291);
         layeredPane.add(imageLabel, new Integer(3));
         
-        // 미션 컴플리트 사진
+        // mission complete picture
         imageLabel = new JLabel();
         Image mission = new ImageIcon("image/stamp_com.png").getImage();
         Image scaledMissionImage = mission.getScaledInstance(666, 438, Image.SCALE_SMOOTH);
@@ -54,7 +54,7 @@ public class Frame_Last extends JFrame{
         imageLabel.setBounds(825, 5, 666, 438);
         layeredPane.add(imageLabel, new Integer(3));
         
-        // close 스크롤
+        // close scroll
         imageLabel = new JLabel();
         Image close_image = new ImageIcon("image/close_scroll.png").getImage();
         Image scaledAcceptImage = close_image.getScaledInstance(315, 168, Image.SCALE_SMOOTH);
@@ -62,33 +62,33 @@ public class Frame_Last extends JFrame{
         imageLabel.setBounds(908, 505, 315, 168);
         layeredPane.add(imageLabel, new Integer(5));
         
-		// 스크롤 눌렀을 때 다음 프레임으로 이동하도록 MouseListener 추가
+		// Add MouseListener to move to the next frame when scrolling is pressed
         imageLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                // 다음 프레임으로 이동
+                // Move to the next frame
             	nextFrame();
             }
         });
 		
-		setFocusable(true);  // 키 이벤트를 받을 수 있도록 포커스 설정
-        requestFocusInWindow();  // 창이 열리면서 바로 포커스 요청
+		setFocusable(true);  // Set focus to receive key events
+        requestFocusInWindow();  // Request focus as soon as the window opens
         
-        // JLayeredPane을 프레임에 추가
+        // Adding JLayerPane to the Frame
         add(layeredPane);
         
-        // 프레임 사이즈 설정
+        // Setting the Frame Size
         setSize(1510, 880);
         setVisible(true);
 		
 		}
 	
-	// 다음 프레임 열기 위한 메소드
+	// Method to open the next frame
     private void nextFrame() {
         
-    	// 현재 프레임을 숨김
+    	// Hide current frame
     	setVisible(false);
-    	dispose();  // 현재 프레임을 메모리에서 제거
+    	dispose();  // Remove current frame from memory
     }
     
     public static void main(String[] args) {
